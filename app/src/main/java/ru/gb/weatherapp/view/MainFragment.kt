@@ -1,4 +1,4 @@
-package ru.gb.kotlinapp.view
+package ru.gb.weatherapp.view
 
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
@@ -8,9 +8,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import com.google.android.material.snackbar.Snackbar
-import ru.gb.kotlinapp.model.Weather
-import ru.gb.kotlinapp.viewmodel.AppState
-import ru.gb.kotlinapp.viewmodel.MainViewModel
+
+import ru.gb.weatherapp.model.Weather
+import ru.gb.weatherapp.viewmodel.MainViewModel
+import ru.gb.weatherapp.databinding.MainFragmentBinding
+import ru.gb.weatherapp.model.Weather
+import ru.gb.weatherapp.viewmodel.AppState
+import ru.gb.weatherapp.viewmodel.MainViewModel
 
 import ru.gb.weatherapp.R
 import ru.gb.weatherapp.view.MainFragmentAdapter
@@ -18,7 +22,7 @@ import ru.gb.weatherapp.view.details.DetailsFragment
 
 class MainFragment : Fragment() {
 
-    private var _binding : MainFragmentBinding? = null
+    private var _binding: MainFragmentBinding? = null
     private val binding get() = _binding!!
     private lateinit var viewModel: MainViewModel
     private var isDataSetRus : Boolean = true
@@ -27,12 +31,11 @@ class MainFragment : Fragment() {
         fun newInstance() = MainFragment()
     }
 
-
-    private val adapter = MainFragmentAdapter(object : MainFragmentAdapter.OnItemViewClickListener{
-        override fun onItemViewClick(weather: Weather){
+    private val adapter = MainFragmentAdapter(object : MainFragmentAdapter.OnItemViewClickListener {
+        override fun onItemViewClick(weather: Weather) {
             val manager = activity?.supportFragmentManager
 
-            if(manager != null){
+            if (manager != null) {
                 val bundle = Bundle()
                 bundle.putParcelable(DetailsFragment.BUNDLE_EXTRA, weather)
                 manager.beginTransaction()
@@ -41,6 +44,7 @@ class MainFragment : Fragment() {
                     .commitAllowingStateLoss()
             }
         }
+
     })
 
     override fun onCreateView(
@@ -48,6 +52,7 @@ class MainFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = MainFragmentBinding.inflate(inflater, container, false)
+
         return binding.root
     }
 
@@ -58,14 +63,16 @@ class MainFragment : Fragment() {
 
         viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
 
-        val observer = Observer<AppState> { renderData(it) }
+        val observer = Observer<AppState> {
+            renderData(it)
+        }
 
         viewModel.getLiveData().observe(viewLifecycleOwner, observer)
         viewModel.getWeatherFromLocalSourceRus()
     }
 
     private fun changeWeatherDataSet() {
-        if(isDataSetRus){
+        if (isDataSetRus) {
             viewModel.getWeatherFromLocalSourceWorld()
             binding.mainFragmentFAB.setImageResource(R.drawable.ic_earth)
         } else {
@@ -82,31 +89,28 @@ class MainFragment : Fragment() {
         _binding = null
     }
 
-
     private fun renderData(appState: AppState) {
-
-        when (appState) {
+        when(appState) {
             is AppState.Success -> {
                 val weatherData = appState.weatherData
                 binding.mainFragmentLoadingLayout.visibility = View.GONE
                 adapter.setWeather(appState.weatherData)
-
             }
+
             is AppState.Loading -> {
                 binding.mainFragmentLoadingLayout.visibility = View.VISIBLE
             }
             is AppState.Error -> {
                 binding.mainFragmentLoadingLayout.visibility = View.GONE
-                Snackbar.
-                make(binding.mainFragmentFAB, getString(R.string.error), Snackbar.LENGTH_INDEFINITE)
+
+                Snackbar
+                    .make(binding.mainFragmentFAB, getString(R.string.error), Snackbar.LENGTH_INDEFINITE)
                     .setAction(getString(R.string.reload)) {
                         viewModel.getWeatherFromLocalSourceRus()
                     }
                     .show()
             }
+
         }
     }
-
-
-
 }
