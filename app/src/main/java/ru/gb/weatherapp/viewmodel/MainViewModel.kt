@@ -1,14 +1,15 @@
-package ru.gb.kotlinapp.viewmodel
+package ru.gb.weatherapp.viewmodel
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import ru.gb.kotlinapp.model.Repository
-import ru.gb.kotlinapp.model.RepositoryImpl
+import ru.gb.weatherapp.model.Repo
+import ru.gb.weatherapp.model.RepoImpl
 import java.lang.Thread.sleep
 
 class MainViewModel(
     private val liveDataToObserve : MutableLiveData<AppState> = MutableLiveData(),
-    private val repositoryImpl: Repository = RepositoryImpl())
+    private val repositoryImpl: Repo = RepoImpl()
+)
     : ViewModel() {
 
     fun getLiveData() = liveDataToObserve

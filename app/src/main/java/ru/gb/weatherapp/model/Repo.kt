@@ -1,4 +1,4 @@
-package ru.gb.kotlinapp.model
+package ru.gb.weatherapp.model
 
 interface Repo {
     fun getWeatherFromServer(): Weather

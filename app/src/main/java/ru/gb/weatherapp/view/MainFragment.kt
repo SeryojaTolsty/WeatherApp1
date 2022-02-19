@@ -6,19 +6,15 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.lifecycle.Observer
 import com.google.android.material.snackbar.Snackbar
-
-import ru.gb.weatherapp.model.Weather
-import ru.gb.weatherapp.viewmodel.MainViewModel
+import ru.gb.weatherapp.R
 import ru.gb.weatherapp.databinding.MainFragmentBinding
 import ru.gb.weatherapp.model.Weather
+import ru.gb.weatherapp.view.details.DetailsFragment
 import ru.gb.weatherapp.viewmodel.AppState
 import ru.gb.weatherapp.viewmodel.MainViewModel
-
-import ru.gb.weatherapp.R
-import ru.gb.weatherapp.view.MainFragmentAdapter
-import ru.gb.weatherapp.view.details.DetailsFragment
 
 class MainFragment : Fragment() {
 

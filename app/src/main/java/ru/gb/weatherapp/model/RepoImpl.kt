@@ -1,4 +1,4 @@
-package ru.gb.kotlinapp.model
+package ru.gb.weatherapp.model
 
 class RepoImpl : Repo {
     override fun getWeatherFromServer(): Weather {
@@ -6,7 +6,7 @@ class RepoImpl : Repo {
     }
 
     override fun getWeatherFromLocalStorageRus(): List<Weather> {
-       return getRussianCities()
+        return getRussianCities()
     }
 
     override fun getWeatherFromLocalStorageWorld(): List<Weather> {

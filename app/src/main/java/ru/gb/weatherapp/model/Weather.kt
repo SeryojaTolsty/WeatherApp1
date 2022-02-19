@@ -1,4 +1,4 @@
-package ru.gb.kotlinapp.model
+package ru.gb.weatherapp.model
 
 import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize

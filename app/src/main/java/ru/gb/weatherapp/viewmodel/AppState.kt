@@ -1,6 +1,6 @@
-package ru.gb.kotlinapp.viewmodel
+package ru.gb.weatherapp.viewmodel
 
-import ru.gb.kotlinapp.model.Weather
+import ru.gb.weatherapp.model.Weather
 
 sealed class AppState {
     data class Success(val weatherData: List<Weather>) : AppState()

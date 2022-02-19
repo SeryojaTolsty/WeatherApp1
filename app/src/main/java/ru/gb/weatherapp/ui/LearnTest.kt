@@ -3,7 +3,7 @@ package ru.gb.weatherapp.ui
 
 import android.util.Log
 import junit.framework.Test
-import ru.gb.kotlinapp.model.Weather
+import ru.gb.weatherapp.model.Weather
 
 class LearnTest {
     var nonNullable: String = ""
@@ -56,4 +56,14 @@ class LearnTest {
     }
 
     class Person(val name: String, var age: Int)
+
+
+
+    //Lesson 4
+    val greetingsFun = {"Hello"}
+
+    fun sum1(a: Int, b: Int) : Int{
+        return a + b
+    }
+    val sum = {a: Int, b: Int -> a + b}
 }

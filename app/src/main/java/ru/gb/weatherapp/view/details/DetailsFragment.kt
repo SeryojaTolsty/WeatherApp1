@@ -5,11 +5,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import ru.gb.kotlinapp.model.Weather
 import ru.gb.weatherapp.R
+import ru.gb.weatherapp.databinding.FragmentDetailsBinding
+import ru.gb.weatherapp.model.Weather
 
-class DetailsFragment : Fragment(){
-    private var _binding: FragmentDetailBinding? = null
+class DetailsFragment : Fragment() {
+    private var _binding: FragmentDetailsBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreateView(
@@ -26,7 +27,7 @@ class DetailsFragment : Fragment(){
 
         val weather = arguments?.getParcelable<Weather>(BUNDLE_EXTRA)
 
-        if(weather != null){
+        if (weather != null) {
             val city = weather.city
             binding.cityName.text = city.city
 
@@ -36,6 +37,7 @@ class DetailsFragment : Fragment(){
                 city.lon.toString()
             )
             binding.temperatureValue.text = weather.temperature.toString()
+            binding.feelsLikeValue.text = weather.feelsLike.toString()
         }
     }
 
@@ -48,7 +50,7 @@ class DetailsFragment : Fragment(){
     companion object {
         const val BUNDLE_EXTRA = "weather"
 
-        fun newInstance(bundle: Bundle): DetailsFragment{
+        fun newInstance(bundle: Bundle): DetailsFragment {
             val fragment = DetailsFragment()
             fragment.arguments = bundle
             return fragment
