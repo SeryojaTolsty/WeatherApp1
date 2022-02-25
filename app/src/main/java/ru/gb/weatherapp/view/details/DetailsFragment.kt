@@ -25,6 +25,20 @@ class DetailsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        arguments?.getParcelable<Weather>(BUNDLE_EXTRA)?.let{
+            it.city.also{
+                binding.cityName.text = it.city
+
+                binding.cityCoordinates.text = String.format(
+                    getString(R.string.city_coordinates),
+                    it.lat.toString(),
+                    it.lon.toString()
+                )
+            }
+            binding.temperatureValue.text = it.temperature.toString()
+            binding.feelsLikeValue.text = it.feelsLike.toString()
+        }
+
         val weather = arguments?.getParcelable<Weather>(BUNDLE_EXTRA)
 
         if (weather != null) {
